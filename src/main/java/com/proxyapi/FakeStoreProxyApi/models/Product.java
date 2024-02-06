@@ -1,4 +1,4 @@
-package com.proxyapi.FakeStoreProxyApi.model;
+package com.proxyapi.FakeStoreProxyApi.models;
 
 import lombok.Getter;
 import lombok.Setter;

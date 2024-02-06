@@ -1,4 +1,4 @@
-package com.proxyapi.FakeStoreProxyApi.model;
+package com.proxyapi.FakeStoreProxyApi.models;
 
 public class Category {
 
