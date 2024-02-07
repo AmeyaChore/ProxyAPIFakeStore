@@ -1,11 +1,15 @@
 package com.proxyapi.FakeStoreProxyApi.service.serviceImpl;
 
+import com.proxyapi.FakeStoreProxyApi.dto.RequestDto;
 import com.proxyapi.FakeStoreProxyApi.dto.ResponseDto;
 import com.proxyapi.FakeStoreProxyApi.models.Product;
 import com.proxyapi.FakeStoreProxyApi.service.IProductService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpMessageConverterExtractor;
+import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -35,6 +39,16 @@ public class ProductService implements IProductService {
         }
 
         return productList;
+    }
+
+    @Override
+    public Product replaceProduct(Long id, RequestDto requestDto) {
+        String url="https://fakestoreapi.com/products/"+id;
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(requestDto,ResponseDto.class);
+        HttpMessageConverterExtractor<ResponseDto> responseExtractor =
+                new HttpMessageConverterExtractor<>(ResponseDto.class, restTemplate.getMessageConverters());
+        ResponseDto responseDto= restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
+        return responseDtoToProduct(responseDto);
     }
 
     public Product responseDtoToProduct(ResponseDto responseDto){

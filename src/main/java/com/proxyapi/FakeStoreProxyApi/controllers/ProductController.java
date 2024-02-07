@@ -51,7 +51,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public Product replaceProduct(@RequestBody RequestDto requestDto, @PathVariable("id") Long id){
-        return new Product();
+        return productService.replaceProduct(id,requestDto);
     }
 
 }
