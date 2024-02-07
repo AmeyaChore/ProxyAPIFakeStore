@@ -30,6 +30,7 @@ public class ProductController {
 
     @GetMapping("/category")
     public List<Category> getAllCategories(){
+
         return new ArrayList<>();
     }
 
