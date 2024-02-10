@@ -1,0 +1,23 @@
+[33mcommit 2aa9d0a9d8c1a1e0aaaeb45fdecec5c9b503805a[m[33m ([m[1;36mHEAD -> [m[1;32mrealStage[m[33m)[m
+Author: Chore <ameyachore475@gmail.com>
+Date:   Wed Feb 7 22:22:10 2024 +0530
+
+    used restTemplate accoding to us
+
+[33mcommit 43b60084f41b2a033888abe9e48e9a5f7661e0fa[m
+Author: Chore <ameyachore475@gmail.com>
+Date:   Wed Feb 7 06:44:36 2024 +0530
+
+    best way of java to convert response object is
+
+[33mcommit 5ae5c35f405c0bd5e23a1becba991d5260f339ea[m
+Author: Chore <ameyachore475@gmail.com>
+Date:   Tue Feb 6 19:31:39 2024 +0530
+
+    RestTemplate List.class
+
+[33mcommit 8c3419bf9f038e6794c92eb477e98aa131b00a32[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Chore <ameyachore475@gmail.com>
+Date:   Tue Feb 6 16:15:56 2024 +0530
+
+    addedProductController
