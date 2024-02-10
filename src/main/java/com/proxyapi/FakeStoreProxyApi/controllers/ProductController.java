@@ -1,10 +1,13 @@
 package com.proxyapi.FakeStoreProxyApi.controllers;
 
 import com.proxyapi.FakeStoreProxyApi.dto.RequestDto;
+import com.proxyapi.FakeStoreProxyApi.exception.ProductNotFoundException;
 import com.proxyapi.FakeStoreProxyApi.models.Category;
 import com.proxyapi.FakeStoreProxyApi.models.Product;
 import com.proxyapi.FakeStoreProxyApi.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,34 +27,36 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long id){
-        return productService.getSingleProduct(id);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
+        Product product =productService.getSingleProduct(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @GetMapping("/category")
-    public List<Category> getAllCategories(){
+    public ResponseEntity<List<Category>> getAllCategories(){
 
-        return new ArrayList<>();
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     @GetMapping("/category/{categoryName}")
-    public List<Product> getAllProducts(@PathVariable("categoryName") String categoryName){
-        return new ArrayList<>();
+    public ResponseEntity<List<Product>> getAllProducts(@PathVariable("categoryName") String categoryName){
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.OK);
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody RequestDto requestDto){
-        return new Product();
+    public ResponseEntity<Product> addProduct(@RequestBody RequestDto requestDto){
+        return ResponseEntity.ok(new Product());
     }
 
     @PatchMapping("/{id}")
-    public Product updateProduct(@RequestBody RequestDto requestDto, @PathVariable("id") Long id){
-        return new Product();
+    public ResponseEntity<Product> updateProduct(@RequestBody RequestDto requestDto, @PathVariable("id") Long id){
+        return new ResponseEntity<>(new Product(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public Product replaceProduct(@RequestBody RequestDto requestDto, @PathVariable("id") Long id){
-        return productService.replaceProduct(id,requestDto);
+    public ResponseEntity<Product> replaceProduct(@RequestBody RequestDto requestDto, @PathVariable("id") Long id){
+        Product product=productService.replaceProduct(id, requestDto);
+        return new ResponseEntity<>(product,HttpStatus.OK);
     }
 
 }

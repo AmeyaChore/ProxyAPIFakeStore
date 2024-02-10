@@ -2,9 +2,9 @@ package com.proxyapi.FakeStoreProxyApi.service.serviceImpl;
 
 import com.proxyapi.FakeStoreProxyApi.dto.RequestDto;
 import com.proxyapi.FakeStoreProxyApi.dto.ResponseDto;
+import com.proxyapi.FakeStoreProxyApi.exception.ProductNotFoundException;
 import com.proxyapi.FakeStoreProxyApi.models.Product;
 import com.proxyapi.FakeStoreProxyApi.service.IProductService;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements IProductService {
@@ -23,9 +22,12 @@ public class ProductService implements IProductService {
     RestTemplate restTemplate;
 
     @Override
-    public Product getSingleProduct(Long id) {
+    public Product getSingleProduct(Long id) throws ProductNotFoundException {
         ResponseDto responseDto= restTemplate
                 .getForObject("https://fakestoreapi.com/products/"+id, ResponseDto.class);
+        if(responseDto==null){
+            throw new ProductNotFoundException("Product with id:-"+id+" not found");
+        }
         return responseDtoToProduct(responseDto);
     }
 
