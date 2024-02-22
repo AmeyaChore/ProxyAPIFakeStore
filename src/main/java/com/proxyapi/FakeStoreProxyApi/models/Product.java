@@ -6,20 +6,16 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
-public class Product {
-    @Id
-    private Long id;
-    private String name;
-
+public class Product extends BaseModel {
+    private String title;
     private String description;
-
     private double price;
-
     private String imageUrl;
-
     @ManyToOne
     private Category category;
 
